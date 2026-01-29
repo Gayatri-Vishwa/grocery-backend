@@ -28,7 +28,7 @@ app.use(cors({origin: allowedOrigins , credentials:true}));
 
 
 //api end points
-app.use('/images', express.static("uploads"))  //uploads folder will create now here save images
+// app.use('/images', express.static("uploads"))  //uploads folder will create now here save images
 app.use('/api/user' , userRoutes)
 app.use('/api/seller',sellerRoutes)
 app.use('/api/product',productRoutes)
