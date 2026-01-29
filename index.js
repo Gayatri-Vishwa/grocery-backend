@@ -10,6 +10,7 @@ import cartRoutes from './routes/cart.routes.js'
 import orderRoutes from './routes/order.routes.js'
 import addressRoutes from './routes/address.routes.js'
 import { connectCloudinary } from './config/cloudinary.js'
+const router = express.Router();
 
 dotenv.config()
 const app=express()
@@ -35,6 +36,16 @@ app.use('/api/product',productRoutes)
 app.use('/api/cart',cartRoutes)
 app.use('/api/order',orderRoutes)
 app.use('/api/address',addressRoutes)
+
+router.get('/', (req, resp) => {
+  try {
+    resp.send("yes it is working");
+  } catch (err) {
+    console.error("GET / error:", err);
+    resp.status(500).send("Server Error");
+  }
+});
+
 
 
 const PORT=process.env.PORT || 4000;
