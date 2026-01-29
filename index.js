@@ -15,7 +15,7 @@ import { connectCloudinary } from './config/cloudinary.js'
 dotenv.config()
 const app=express()
 
-connectDB();
+await connectDB();
 connectCloudinary()
 const allowedOrigins=['http://localhost:5173','http://localhost:5174',process.env.CLIENT_URL]
 
