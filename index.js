@@ -21,7 +21,7 @@ const app=express()
 
  let isConnected=false
 
-// await connectDb(); // 🔥 FIRST
+
 app.use(async (req, res, next) => {
   if (!isConnected) await connectDB();
   next();
@@ -65,7 +65,7 @@ app.get('/', (req, resp) => {
 
 
 
-const PORT=process.env.PORT || 4000;
+// const PORT=process.env.PORT || 4000;
 // app.listen(PORT ,()=>{
 //     console.log(`server is running on http://localhost:${PORT}`)
 // })
