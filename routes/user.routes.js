@@ -4,6 +4,10 @@ import { authUser } from '../middleware/authUser.js' //will check user loggedin 
 
 const router =express.Router()
 
+
+router.get('/',(req,resp)=>{
+resp.send("yes it is working")
+})
 router.post('/register', registerUser)  // creates routes
 router.post('/login',loginUser)
 router.get('/logout',authUser,logeOutUser)  //authuser will check is loggedin ?
