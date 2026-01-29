@@ -20,44 +20,16 @@ const app=express()
 
 
  let isConnected=false
-async function connectDb() {
-     if (isConnected) return;
-    try{
-        await mongoose.connect(process.env.MONGODB_URL ,{
-            useNewUrlParser:true,
-            useUnifiedTopology:true
-        })
-        isConnected=true;
-        console.log("Connected to mongodb");
-        
-    }
-    catch(error){
-        console.error("Error connected to mongo db", error);
-        
-    }
-}
 
 // await connectDb(); // 🔥 FIRST
 app.use(async (req, res, next) => {
-  if (!isConnected) await connectDb();
+  if (!isConnected) await connectDB();
   next();
 });
 
 
 
-
-
-
-
-
-
-
 connectCloudinary()
-
-
-
-
-
 
 
 const allowedOrigins=['http://localhost:5173','http://localhost:5174',
