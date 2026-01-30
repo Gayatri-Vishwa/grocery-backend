@@ -3,7 +3,7 @@ import cors from 'cors'
 import cookieParser  from 'cookie-parser'
 import dotenv from 'dotenv'
 import mongoose from "mongoose";
-import serverless from 'serverless-http';
+// import serverless from 'serverless-http';
 // import { connectDB } from './config/connectDB.js'             //.js is imp because we are using import 
 import userRoutes from './routes/user.routes.js'   //name can be anything here like. userRoutes
 import sellerRoutes from './routes/seller.routes.js'
@@ -37,28 +37,17 @@ async function connectDb() {
     }
 }
 
-// app.use(async (req, res, next) => {
-//   if (!isConnected) await connectDb();
-//   next();
-// });
-
-//  await connectCloudinary();
-
-let cloudinaryConnected = false;
-
-async function initCloudinary() {
-  if (!cloudinaryConnected) {
-    await connectCloudinary();
-    cloudinaryConnected = true;
-  }
-}
-
 app.use(async (req, res, next) => {
   if (!isConnected) await connectDb();
-  if (!cloudinaryConnected) await initCloudinary();
   next();
 });
 
+
+//  await connectCloudinary();
+// app.use(async (req, res, next) => {
+//    await connectCloudinary();
+//   next();
+// });
 
 
 const allowedOrigins=[
@@ -100,4 +89,5 @@ app.get('/', (req, resp) => {
 
 
 
-export default serverless(app)
+export default app
+// export default serverless(app)
