@@ -39,12 +39,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser())
 
-// app.use(cors({origin: allowedOrigins , credentials:true}));
+app.use(cors({origin: allowedOrigins , credentials:true}));
 
-app.use(cors({
-  origin: true,
-  credentials: true
-}))
+// app.use(cors({
+//   origin: true,
+//   credentials: true
+// }))
 
 
 //api end points
