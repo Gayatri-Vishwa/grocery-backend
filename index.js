@@ -15,16 +15,16 @@ import { connectCloudinary } from './config/cloudinary.js'
 dotenv.config()
 const app=express()
 
-// await connectDB();
+ connectDB();
 
 
 
-connectDB()
-  .then(() => console.log("✅ DB connected"))
-  .catch(err => {
-    console.error("❌ DB failed:", err.message);
-    process.exit(1);
-  });
+// connectDB()
+//   .then(() => console.log("✅ DB connected"))
+//   .catch(err => {
+//     console.error("❌ DB failed:", err.message);
+//     process.exit(1);
+//   });
 
 connectCloudinary()
 
@@ -40,11 +40,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 app.use(cors({origin: allowedOrigins , credentials:true}));
-
-// app.use(cors({
-//   origin: true,
-//   credentials: true
-// }))
 
 
 //api end points
