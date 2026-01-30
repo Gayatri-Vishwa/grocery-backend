@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser  from 'cookie-parser'
 import dotenv from 'dotenv'
 import mongoose from "mongoose";
+import serverless from 'serverless-http';
 // import { connectDB } from './config/connectDB.js'             //.js is imp because we are using import 
 import userRoutes from './routes/user.routes.js'   //name can be anything here like. userRoutes
 import sellerRoutes from './routes/seller.routes.js'
@@ -88,4 +89,4 @@ app.get('/', (req, resp) => {
 
 
 
-export default app
+export default serverless(app)
