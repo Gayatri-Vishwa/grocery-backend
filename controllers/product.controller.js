@@ -1,6 +1,7 @@
 import Product from "../models/product.model.js";
 
 
+
 //    /api/product/add-product
 export const addProduct = async (req, resp) => {
   try {
@@ -112,3 +113,20 @@ export const updateProductImage = async (req, res) => {
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

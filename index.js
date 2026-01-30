@@ -42,10 +42,10 @@ app.use(async (req, res, next) => {
   next();
 });
 
-await connectCloudinary()
-
-
-
+app.use(async (req, res, next) => {
+  if (!isCloudinaryConnected) await connectCloudinary();
+  next();
+});
 
 
 
