@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser  from 'cookie-parser'
 import dotenv from 'dotenv'
-import { connectDB } from './config/connectDB.js'             //.js is imp because we are using import 
+// import { connectDB } from './config/connectDB.js'             //.js is imp because we are using import 
 import userRoutes from './routes/user.routes.js'   //name can be anything here like. userRoutes
 import sellerRoutes from './routes/seller.routes.js'
 import productRoutes from './routes/product.routes.js'
@@ -15,22 +15,46 @@ import { connectCloudinary } from './config/cloudinary.js'
 dotenv.config()
 const app=express()
 
- connectDB();
+//  connectDB();
 
+ let isConnected=false
+async function connectDb() {
+     if (isConnected) return;
+    try{
+        await mongoose.connect(process.env.MONGODB_URL ,{
+            useNewUrlParser:true,
+            useUnifiedTopology:true
+        })
+        isConnected=true;
+        console.log("Connected to mongodb");
+        
+    }
+    catch(error){
+        console.error("Error connected to mongo db", error);
+        
+    }
+}
 
-
-// connectDB()
-//   .then(() => console.log("✅ DB connected"))
-//   .catch(err => {
-//     console.error("❌ DB failed:", err.message);
-//     process.exit(1);
-//   });
+app.use(async (req, res, next) => {
+  if (!isConnected) await connectDb();
+  next();
+});
 
 connectCloudinary()
 
 
-const allowedOrigins=['http://localhost:5173','http://localhost:5174',
-    process.env.CLIENT_URL
+
+
+
+
+
+const allowedOrigins=[
+        "http://localhost:5178", // ✅ ADD THIS
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "http://localhost:5175",
+      "http://localhost:5176",
+      process.env.CLIENT_URL,
 ]
 
 //middlewares
