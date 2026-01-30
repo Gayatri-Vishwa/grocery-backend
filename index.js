@@ -77,14 +77,7 @@ app.use('/api/cart',cartRoutes)
 app.use('/api/order',orderRoutes)
 app.use('/api/address',addressRoutes)
 
-app.get('/', (req, resp) => {
-  try {
-    resp.send("yes it is working");
-  } catch (err) {
-    console.error("GET / error:", err);
-    resp.status(500).send("Server Error");
-  }
-});
+
 
 
 

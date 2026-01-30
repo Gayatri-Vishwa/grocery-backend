@@ -10,6 +10,13 @@ router.post('/login',loginUser)
 router.get('/logout',authUser,logeOutUser)  //authuser will check is loggedin ?
 router.get('/is-auth',authUser,isAuthUser)  //authuser will check is loggedin ?
 
-
+router.get('/', (req, resp) => {
+  try {
+    resp.send("yes it is working");
+  } catch (err) {
+    console.error("GET / error:", err);
+    resp.status(500).send("Server Error");
+  }
+});
 
 export default router
