@@ -42,12 +42,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.use(async (req, res, next) => {
-  if (!isCloudinaryConnected) await connectCloudinary();
-  next();
-});
-
-
+ await connectCloudinary();
 
 
 const allowedOrigins=[
