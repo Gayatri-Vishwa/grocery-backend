@@ -37,12 +37,28 @@ async function connectDb() {
     }
 }
 
+// app.use(async (req, res, next) => {
+//   if (!isConnected) await connectDb();
+//   next();
+// });
+
+//  await connectCloudinary();
+
+let cloudinaryConnected = false;
+
+async function initCloudinary() {
+  if (!cloudinaryConnected) {
+    await connectCloudinary();
+    cloudinaryConnected = true;
+  }
+}
+
 app.use(async (req, res, next) => {
   if (!isConnected) await connectDb();
+  if (!cloudinaryConnected) await initCloudinary();
   next();
 });
 
- await connectCloudinary();
 
 
 const allowedOrigins=[
