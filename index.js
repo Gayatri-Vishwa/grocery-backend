@@ -19,15 +19,12 @@ const app=express()
 
 
 
- let isConnected=false
-
-
-app.use(async (req, res, next) => {
-  if (!isConnected) await connectDB();
-  next();
-});
-
-
+connectDB()
+  .then(() => console.log("✅ DB connected"))
+  .catch(err => {
+    console.error("❌ DB failed:", err.message);
+    process.exit(1);
+  });
 
 connectCloudinary()
 
