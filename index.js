@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-connectCloudinary()
+await connectCloudinary()
 
 
 
