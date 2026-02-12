@@ -20,5 +20,5 @@ router.get("/:id", getProductById);
 router.post("/stock", authSeller, changeStock);
 export default router;
 
-router.put("/update-image/:id",authSeller, upload.array("image", 5), updateProductImage);
+// router.put("/update-image/:id",authSeller, upload.array("image", 5), updateProductImage);
 // router.patch("/update-images/:id", upload.array("images"), updateProductImage);
