@@ -23,13 +23,10 @@
 
 
 
+
 import multer from "multer";
 
-const storage = multer.memoryStorage();
+const storage = multer.memoryStorage(); // memoryStorage for serverless
 const upload = multer({ storage });
 
-router.post(
-  "/add-product",
-  upload.array("image", 4),
-  addProduct
-);
+export default upload;
