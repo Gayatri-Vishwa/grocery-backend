@@ -7,8 +7,8 @@
 //     })
 // }
 
-import { v2 as cloudinary } from "cloudinary";
 
+import { v2 as cloudinary } from "cloudinary";
 let isCloudinaryConnected = false;
 
 export const connectCloudinary = async () => {
@@ -21,4 +21,5 @@ export const connectCloudinary = async () => {
   isCloudinaryConnected = true;
   console.log("✅ Cloudinary connected (serverless)");
 };
+
 

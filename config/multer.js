@@ -1,6 +1,6 @@
 
 
-// not mine
+// // not mine
 // import multer from "multer";
 // import { CloudinaryStorage } from "multer-storage-cloudinary";
 // import { v2 as cloudinary } from "cloudinary";
@@ -30,6 +30,6 @@ const upload = multer({ storage });
 
 router.post(
   "/add-product",
-  upload.array("images", 4),
+  upload.array("image", 4),
   addProduct
 );
