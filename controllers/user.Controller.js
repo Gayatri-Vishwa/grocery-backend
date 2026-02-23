@@ -27,8 +27,8 @@ export const registerUser = async (req, resp) => {
     resp.cookie("token", token, {
       //store token in cookie
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", //use secure cookies in  production
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // helps prevent CSRF attacks
+      secure:true, //use secure cookies in  production
+      sameSite:  "none" , // helps prevent CSRF attacks
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days age in millisec
     });
     resp.json({
@@ -76,8 +76,8 @@ export const loginUser = async (req, resp) => {
     resp.cookie("token", token, {
       //store token in cookie
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", //use secure cookies in  production
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // helps prevent CSRF attacks
+      secure: true, //use secure cookies in  production
+      sameSite:  "none" , // helps prevent CSRF attacks
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days age in millisec
     });
     resp.json({

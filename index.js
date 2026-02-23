@@ -17,7 +17,7 @@ const app=express()
 
 //new
 app.set("trust proxy", 1);
-const PORT = process.env.PORT || 10000;
+// const PORT = process.env.PORT || 10000;
 
 
 
