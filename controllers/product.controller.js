@@ -3,39 +3,83 @@ import Product from "../models/product.model.js";
 
 
 //    /api/product/add-product
+// export const addProduct = async (req, resp) => {
+//   try {
+    
+//      console.log("BODY:", req.body); 
+//     const { name, description, price, offerPrice, category} = req.body;
+//     const image = req.files?.map((file) => file.path); // Cloudinary URLs
+
+//     // const image = req.files?.map((file)=>file.filename);
+//      if (
+//       !name ||
+//       !price ||
+//       !offerPrice ||
+//       !description ||
+//       !category ||
+//       !image ||
+//       image.length === 0
+//     ) {
+//       return resp.status(400).json({
+//         success: false,
+//         message: "All fields including images are required",
+//       });
+//     }
+//     const newProduct =await Product.create({
+//       name,
+//       description,
+//       price,
+//       offerPrice,
+//       category,
+//       image,
+//     });
+//     resp.status(201).json({message:"Product Added successfully" , success:true ,product:newProduct})
+//   } catch (error) {
+//     resp.status(500).json({ message: " Server error", error: error.message });
+//   }
+// };
+import { v2 as cloudinary } from "cloudinary";
+// import Product from "../models/product.model.js";
+import { connectCloudinary } from "../config/cloudinary.js";
+
 export const addProduct = async (req, resp) => {
   try {
-    
-     console.log("BODY:", req.body); 
-    const { name, description, price, offerPrice, category} = req.body;
-    const image = req.files?.map((file) => file.path); // Cloudinary URLs
+    await connectCloudinary(); // Cloudinary config
 
-    // const image = req.files?.map((file)=>file.filename);
-     if (
-      !name ||
-      !price ||
-      !offerPrice ||
-      !description ||
-      !category ||
-      !image ||
-      image.length === 0
-    ) {
-      return resp.status(400).json({
-        success: false,
-        message: "All fields including images are required",
-      });
+    const { name, description, price, offerPrice, category } = req.body;
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+      return resp.status(400).json({ success: false, message: "Please upload at least one image" });
     }
-    const newProduct =await Product.create({
+
+    // Upload images to Cloudinary
+    const imageUrls = [];
+    for (let file of files) {
+      const result = await cloudinary.uploader.upload_stream({ folder: "ecommerce" }, (error, result) => {
+        if (error) throw error;
+        imageUrls.push(result.secure_url);
+      });
+      result.end(file.buffer);
+    }
+
+    // Validate other fields
+    if (!name || !price || !offerPrice || !description || !category) {
+      return resp.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const newProduct = await Product.create({
       name,
       description,
       price,
       offerPrice,
       category,
-      image,
+      image: imageUrls,
     });
-    resp.status(201).json({message:"Product Added successfully" , success:true ,product:newProduct})
+
+    resp.status(201).json({ message: "Product Added successfully ✅", success: true, product: newProduct });
   } catch (error) {
-    resp.status(500).json({ message: " Server error", error: error.message });
+    resp.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
