@@ -11,7 +11,13 @@ import {
 const router = express.Router();
 
 // //router.post('/add-product', authSeller,upload.array("image")  , addProduct)
-router.post("/add-product", upload.array("image"), authSeller, addProduct);
+// router.post("/add-product", upload.array("image"), authSeller, addProduct);
+
+// Add Product (4 images max)
+router.post("/add-product", upload.array("image", 4),authSeller, addProduct);
+
+// Update Product Images
+router.put("/update-image/:id", upload.array("image", 4), updateProductImage);
 
 
 router.get("/list", getProducts);
