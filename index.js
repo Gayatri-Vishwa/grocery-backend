@@ -13,14 +13,14 @@ import cartRoutes from './routes/cart.routes.js'
 import orderRoutes from './routes/order.routes.js'
 import addressRoutes from './routes/address.routes.js'
 import { connectCloudinary } from './config/cloudinary.js'
-
+const app=express()
 
 //new
 app.set("trust proxy", 1);
 const PORT = process.env.PORT || 10000;
 
 
-const app=express()
+
 
 //  connectDB();
 
@@ -56,11 +56,7 @@ app.use(async (req, res, next) => {
 
 
 const allowedOrigins=[
-        "http://localhost:5178", // ✅ ADD THIS
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:5175",
-      "http://localhost:5176",
+      
       process.env.CLIENT_URL,
 ]
 
