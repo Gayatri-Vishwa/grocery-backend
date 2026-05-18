@@ -8,12 +8,13 @@ export const authSeller=(req,resp,next)=>{          // this will check is user l
         if(!sellerToken){
               return resp.status(401).json({message:"UnAuthorize" ,success:false})
         }
-        const decoded =jwt.verify(sellerToken,process.env.JWT_SECRET)
-        if(decoded.email===process.env.SELLER_EMAIL)
-        next();                                //next() → passes control to the next middleware or route handler if authentication succeeds
-        
+        const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
+        if (decoded.email === process.env.SELLER_EMAIL) {
+            return next();
+        }
+        return resp.status(401).json({ message: "UnAuthorize", success: false });
     } catch (error) {
-        console.log(error)
-        return resp.status(401).json({message:"UnAuthorize" ,success:false})
+        console.log(error);
+        return resp.status(401).json({ message: "UnAuthorize", success: false });
     }
 }
