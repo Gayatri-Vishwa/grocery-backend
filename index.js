@@ -85,3 +85,11 @@ app.use('/api/address',addressRoutes)
 
 export default app
 
+// Basic health check for deployments
+app.get('/', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'Backend is up' });
+});
+
+// Export a serverless handler for Vercel
+export const handler = serverless(app);
+
