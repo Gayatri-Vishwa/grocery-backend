@@ -57,6 +57,15 @@ const uploadBufferToCloudinary = (buffer) => {
 
 export const addProduct = async (req, res) => {
   try {
+    // debug: log incoming request summary
+    console.log("[addProduct] req.body keys:", Object.keys(req.body));
+    console.log("[addProduct] req.files present:", Array.isArray(req.files), "count:", req.files?.length);
+    console.log("[addProduct] Cloudinary env:", {
+      cloud: !!process.env.CLOUDINARY_CLOUD_NAME,
+      key: !!process.env.CLOUDINARY_API_KEY,
+      secret: !!process.env.CLOUDINARY_API_SECRET,
+    });
+
     await connectCloudinary();
 
     const files = req.files || [];
@@ -79,8 +88,8 @@ export const addProduct = async (req, res) => {
 
     res.status(201).json({ success: true, product: newProduct });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ success: false, message: err.message });
+    console.error("[addProduct] ERROR:", err && err.stack ? err.stack : err);
+    res.status(500).json({ success: false, message: err.message || "Internal Server Error" });
   }
 };
 
