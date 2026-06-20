@@ -12,9 +12,9 @@ export const authSeller=(req,resp,next)=>{          // this will check is user l
         if (decoded.email === process.env.SELLER_EMAIL) {
             return next();
         }
-        return resp.status(401).json({ message: "UnAuthorize", success: false });
+        return resp.status(401).json({ message: "Unauthorize", success: false });
     } catch (error) {
         console.log(error);
-        return resp.status(401).json({ message: "UnAuthorize", success: false });
+        return resp.status(401).json({ message: "Unauthorize", success: false });
     }
 }
