@@ -13,8 +13,9 @@ export const sellerLogin = async (req, resp) => {
       });
       resp.cookie("sellerToken", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", //use secure cookies in  production
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // helps prevent CSRF attacks
+        secure:"true",
+        sameSite: "none",
+        // sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // helps prevent CSRF attacks
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
       resp.status(200).json({message:"Login successfully" ,success:true})
